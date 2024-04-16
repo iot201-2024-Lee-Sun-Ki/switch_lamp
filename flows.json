@@ -37,27 +37,6 @@
         "className": ""
     },
     {
-        "id": "6fd125193cee1b35",
-        "type": "io7 in",
-        "z": "5ca20d69f2f23b0d",
-        "name": "lamp2",
-        "deviceId": "+",
-        "authentication": "409bd300261a7228",
-        "evt": "+",
-        "fmt": "json",
-        "qos": "0",
-        "allDevices": true,
-        "allEvents": true,
-        "allFormats": false,
-        "x": 170,
-        "y": 200,
-        "wires": [
-            [
-                "0a6ea14d413d835d"
-            ]
-        ]
-    },
-    {
         "id": "0a6ea14d413d835d",
         "type": "function",
         "z": "5ca20d69f2f23b0d",
@@ -136,7 +115,7 @@
         "type": "io7 out",
         "z": "5ca20d69f2f23b0d",
         "authentication": "409bd300261a7228",
-        "name": "lamp2",
+        "name": "lamp",
         "deviceId": "button1",
         "cmd": "power",
         "fmt": "json",
@@ -184,6 +163,27 @@
         "wires": [
             [
                 "faa5b002dc295f8a"
+            ]
+        ]
+    },
+    {
+        "id": "38a54d0c4492f8e5",
+        "type": "io7 in",
+        "z": "5ca20d69f2f23b0d",
+        "name": "lamp",
+        "deviceId": "+",
+        "authentication": "409bd300261a7228",
+        "evt": "+",
+        "fmt": "json",
+        "qos": "0",
+        "allDevices": true,
+        "allEvents": true,
+        "allFormats": false,
+        "x": 190,
+        "y": 200,
+        "wires": [
+            [
+                "0a6ea14d413d835d"
             ]
         ]
     }
