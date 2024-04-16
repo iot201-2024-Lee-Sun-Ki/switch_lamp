@@ -1,1 +1,190 @@
-[]
+[
+    {
+        "id": "5ca20d69f2f23b0d",
+        "type": "tab",
+        "label": "플로우 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "409bd300261a7228",
+        "type": "io7-hub",
+        "name": "lamp",
+        "host": "mqtt",
+        "useTLS": false,
+        "knownPort": true,
+        "port": "1883",
+        "tls": ""
+    },
+    {
+        "id": "48466b619d6256f3",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "a1b36a9f81214b3d",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "48466b619d6256f3",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "6fd125193cee1b35",
+        "type": "io7 in",
+        "z": "5ca20d69f2f23b0d",
+        "name": "lamp2",
+        "deviceId": "+",
+        "authentication": "409bd300261a7228",
+        "evt": "+",
+        "fmt": "json",
+        "qos": "0",
+        "allDevices": true,
+        "allEvents": true,
+        "allFormats": false,
+        "x": 170,
+        "y": 200,
+        "wires": [
+            [
+                "0a6ea14d413d835d"
+            ]
+        ]
+    },
+    {
+        "id": "0a6ea14d413d835d",
+        "type": "function",
+        "z": "5ca20d69f2f23b0d",
+        "name": "update",
+        "func": "msg.payload = msg.payload.d.lamp;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 200,
+        "wires": [
+            [
+                "86061a69713b7db6"
+            ]
+        ]
+    },
+    {
+        "id": "86061a69713b7db6",
+        "type": "ui_switch",
+        "z": "5ca20d69f2f23b0d",
+        "name": "",
+        "label": "switch",
+        "tooltip": "",
+        "group": "a1b36a9f81214b3d",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": "true",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "on",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "off",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 510,
+        "y": 200,
+        "wires": [
+            [
+                "76ceeda352ace416"
+            ]
+        ]
+    },
+    {
+        "id": "76ceeda352ace416",
+        "type": "function",
+        "z": "5ca20d69f2f23b0d",
+        "name": "command",
+        "func": "msg.payload = {\n    \"d\": {\n        \"lamp\": msg.payload\n    }\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 200,
+        "wires": [
+            [
+                "faa5b002dc295f8a"
+            ]
+        ]
+    },
+    {
+        "id": "faa5b002dc295f8a",
+        "type": "io7 out",
+        "z": "5ca20d69f2f23b0d",
+        "authentication": "409bd300261a7228",
+        "name": "lamp2",
+        "deviceId": "button1",
+        "cmd": "power",
+        "fmt": "json",
+        "qos": "0",
+        "retain": "false",
+        "x": 810,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "fd26bd04f2f0349f",
+        "type": "io7 in",
+        "z": "5ca20d69f2f23b0d",
+        "name": "switch",
+        "deviceId": "+",
+        "authentication": "409bd300261a7228",
+        "evt": "+",
+        "fmt": "json",
+        "qos": "0",
+        "allDevices": true,
+        "allEvents": true,
+        "allFormats": false,
+        "x": 190,
+        "y": 280,
+        "wires": [
+            [
+                "4d653cae22318d75"
+            ]
+        ]
+    },
+    {
+        "id": "4d653cae22318d75",
+        "type": "function",
+        "z": "5ca20d69f2f23b0d",
+        "name": "switch ->lamp",
+        "func": "msg.payload = {\n    \"d\" : {\n        \"lamp\" : msg.payload.d.switch\n    }\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 280,
+        "wires": [
+            [
+                "faa5b002dc295f8a"
+            ]
+        ]
+    }
+]
